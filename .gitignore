@@ -1,0 +1,5 @@
+*.enc
+*.zip
+*.pyc
+*delivered
+*tested
