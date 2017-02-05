@@ -25,6 +25,14 @@ LAMBDA_TESTED=lambda_tested
 LAMBDA_ROLE_TESTED=lambda_role_tested
 
 
+# emulambda uses the [default] profile in credentials.
+# This identity must have all the perms that the Lmbda will use
+	# You are pointing to the file and functions you defined
+	# the Handler area for the Lambda (the code below assumes the function is named
+	# lambda_handler
+	# #This make string is convoluted because emulambda currently doesn't return as shell error
+	# status, soo we test for error and set the status successfule if an error exists,
+	# meaning we should remove the success flag - Oh yeah, kludge baby
 
 
 
@@ -38,14 +46,7 @@ $(LAMBDA): Makefile $(ZIPFILE)
 
 all: $(LAMBDA) $(LAMBDA_DELIVERED) 
 
-# emulambda uses the [default] profile in credentials.
-# This identity must have all the perms that the Lmbda will use
-	# You are pointing to the file and functions you defined
-	# the Handler area for the Lambda (the code below assumes the function is named
-	# lambda_handler
-	# #This make string is convoluted because emulambda currently doesn't return as shell error
-	# status, soo we test for error and set the status successfule if an error exists,
-	# meaning we should remove the success flag - Oh yeah, kludge baby
+
 $(LAMBDA_TESTED): $(SRC) $(LIBS)
 	emulambda -v $(LAMBDA).lambda_handler test-perms.json | tee /tmp/make_out.$$; grep -i error /tmp/make_out.$$ >/dev/null || touch lambda_tested
 
