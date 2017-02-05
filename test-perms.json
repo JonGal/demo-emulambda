@@ -13,7 +13,7 @@
           "key": "250px-Rio_Grande_Gorge_Bridge.jpg"
         },
         "bucket": {
-          "arn": "arn:aws:s3:::mybucket",
+          "arn": "arn:aws:s3:::ndh-lab-dev",
           "name": "ndh-lab-dev",
           "ownerIdentity": {
             "principalId": "EXAMPLE"
